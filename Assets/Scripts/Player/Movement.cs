@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         ren = GetComponent<SpriteRenderer>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
   
@@ -28,9 +29,18 @@ public class Movement : MonoBehaviour
         bool InputS = Input.GetKeyDown(KeyCode.S);
         float InputX = Input.GetAxis("Horizontal");
 
-        if (InputX < 0 && LookAt || InputX > 0 && !LookAt ) Flip();
-
+        if (InputX < 0 && LookAt || InputX > 0 && !LookAt ) {
+            Flip();
+            
+        }
+        
         rb.velocity = new Vector2(speed * InputX, rb.velocity.y);
+        if(InputX!= 0 ){
+             animator.SetBool("Run", true);
+        }
+        else{
+            animator.SetBool("Run", false);
+        }
         if (grounded && InputY && jumpButtonColldown<=0 )
         {
       
