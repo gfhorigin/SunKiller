@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform AttackPos;
     public float AttackRange;
     public LayerMask Enemy;
-    
+    public GameObject GreenComboBar;
 
     public int Damage;
     public Animator animator;
@@ -32,6 +32,7 @@ public class PlayerAttack : MonoBehaviour
         {
             ComboCounter = 0;
             ComboText.text = " ";
+            GreenComboBar.gameObject.SetActive(false);
         }
 
 
@@ -54,6 +55,7 @@ public class PlayerAttack : MonoBehaviour
     {
         ComboCounter +=1;
         ComboTimer = ComboTimerStart;
+        GreenComboBar.gameObject.SetActive(true);
         ComboText.text = ComboCounter.ToString();
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(AttackPos.position,AttackRange, Enemy);
